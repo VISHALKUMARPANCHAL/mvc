@@ -1,0 +1,16 @@
+<!-- <h1>head phtml</h1> -->
+
+<head>
+
+    <?php foreach ($this->getJs() as $js):    ?>
+    <script src="<?php echo Mage::getBaseUrl() . 'js/' . $js ?>">
+    </script>
+    <?php endforeach; ?>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <?php foreach ($this->getCss() as $css):    ?>
+    <link rel="stylesheet" href="<?php echo Mage::getBaseUrl() . 'css/' . $css . "?v=6" ?>">
+    </link>
+    <?php endforeach; ?>
+
+</head>

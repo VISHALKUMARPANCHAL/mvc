@@ -1,0 +1,121 @@
+    <h1>new phtml</h1>
+
+    <?php
+    $products = $this->getProduct();
+    $id = $products->getProductId();
+
+    ?>
+
+    <body>
+
+        <h2>Product Data</h2>
+        <form method="post" action="<?php echo $this->getUrl('*/*/save') ?>" id="form1" enctype="multipart/form-data">
+            <input type="number" name="catlog_product[product_id]" value="<?php echo $products->getProductId()  ?>"
+                hidden>
+            <label for="name">Name:</label>
+            <input type="text" name="catlog_product[name]" id="category_name" placeholder="name"
+                value="<?php echo $products->getName()  ?>">
+            <span id="name_error"></span>
+            <label for="name">Description:</label>
+            <textarea name="catlog_product[description]" id="product_desc" placeholder="description"
+                value="<?php echo ($id) ?  $products->getDescription() : '' ?>"><?php echo ($id) ?  $products->getDescription() : '' ?></textarea>
+            <span id="desc_error"></span>
+            <label for="product_price">Price:</label>
+            <input type="number" name="catlog_product[price]" id="product_price" placeholder="price"
+                value="<?php echo ($id) ?  $products->getPrice() : '' ?>">
+            <span id="price_error"></span>
+
+            <?php if ($id) : ?>
+
+                <input type="text" name="oldimage" value="<?php echo ($products) ? $products->getImage() : '' ?>" readonly>
+                <img src="<?php echo Mage::getBaseUrl() . $products->getImage()  ?>" width="100" height="100"
+                    alt="Category_Image">
+                <br>
+            <?php endif; ?>
+
+            <label for="image">Image:</label>
+            <input type="file" id="image" name="catlog_product[image]"
+                value="<?php echo ($id) ?  $products->getImage() : '' ?>" accept="image/*"><br>
+            <label for="rating">Rating:</label>
+            <input type="range" id="range" min="0" max="5" id="rating" step="0.5" name="catlog_product[rating]"
+                oninput="onrangeupdate(this.value)" value="<?php echo ($id) ?  $products->getRating() : 0 ?>"
+                required><br>
+            <span id="rangespan">0</span><br>
+            <label for="color">color:</label>
+            <input type="color" id="color" name="catlog_product[color]" oninput="oncolorupdate(this.value)"
+                value="<?php echo ($id) ?  $products->getcolor() : '' ?>" required><br>
+            <span id="colorspan">#000000</span><br>
+            <label for="size">size:</label>
+            <input type="number" id="size" name="catlog_product[size]"
+                value="<?php echo ($id) ?  $products->getsize() : '' ?>" required><br>
+            <label for="brand">brand:</label>
+            <input type="text" id="brand" name="catlog_product[brand]"
+                value="<?php echo ($id) ?  $products->getbrand() : '' ?>" required><br>
+            <label for="warranty">warranty:</label>
+            <input type="number" id="warranty" name="catlog_product[warranty]"
+                value="<?php echo ($id) ?  $products->getwarranty() : '' ?>" required><br>
+            <label for="weight">weight:</label>
+            <input type="number" id="weight" name="catlog_product[weight]"
+                value="<?php echo ($id) ?  $products->getweight() : '' ?>" required><br>
+
+            <label for="made_in">made_in:</label>
+            <select name="catlog_product[made_in]" id="made_in">
+                <option value="" id="selectfirst" selected disabled hidden>--Country--</option>
+                <?php
+                $madein = ['India', 'China', 'USA'];
+                foreach ($madein as $mi):
+                ?>
+                    <option value="<?php echo $mi; ?>"
+                        <?php echo ($id) ? (($mi ===  $products->getMadeIn()) ? 'selected' : '') : ''; ?>>
+                        <?php echo htmlspecialchars($mi); ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+
+            <?php
+            $categories = [];
+            $categories = $this->getCategories();
+            ?>
+            <label for="category_id">category:</label>
+            <select name="catlog_product[category_id]" id="category_id">
+                <option value="" id="selectfirst" selected disabled hidden>--category--</option>
+                <?php foreach ($categories as $category): ?>
+                    <option value="<?php echo htmlspecialchars($category->getCategoryId()); ?>"
+                        <?php echo ($id) ? (($products->getCategoryId() ===  $category->getCategoryId()) ? 'selected' : '') : ''; ?>>
+                        <?php echo htmlspecialchars($category->getName()); ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+
+
+            <label for="model">model:</label>
+            <input type="text" id="model" name="catlog_product[model]"
+                value="<?php echo ($id) ?  $products->getModel() : '' ?>" required><br>
+            <label for="mfg_date">mfg_date:</label>
+            <input type="date" id="mfg_date" name="catlog_product[mfg_date]"
+                value="<?php echo ($id) ?  $products->getMfgDate() : '' ?>" required><br>
+            <label for="material">material:</label>
+            <input type="text" id="material" name="catlog_product[material]"
+                value="<?php echo ($id) ?  $products->getMaterial() : '' ?>" required><br>
+            <label for="name">t_and_c:</label>
+            <textarea name="catlog_product[t_and_c]" value="<?php echo ($id) ?  $products->getTAndC() : '' ?>"
+                id="product_desc" placeholder="t_and_c"> <?php echo ($id) ?  $products->getTAndC() : '' ?></textarea>
+
+            <label for="image">Status:</label>
+            <select name="catlog_product[status]">
+                <option value="" selected disabled hidden>--status--</option>
+                <option value="1">Enable</option>
+                <option value="0">Disable</option>
+            </select>
+
+            <input type="submit" name="submitbtn">
+
+
+
+        </form>
+
+
+        <a href="<?php echo ($id) ? "." : "" ?>./list"><button id="category"><i
+                    class="fa-solid fa-arrow-left-long"></i></button></a>
+
+    </body>

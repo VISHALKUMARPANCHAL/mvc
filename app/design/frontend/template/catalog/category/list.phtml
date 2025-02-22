@@ -1,0 +1,75 @@
+<!-- <h1>list phtml</h1> -->
+<?php
+echo "<pre>";
+$categories = $this->getData();
+?>
+
+
+
+<body>
+    <h2>Catagory Admin</h2>
+
+
+    <a href="?m=admin&v=category&a=view"><button id="insert"><i
+                class="fa-solid fa-arrow-right-to-bracket"></i></button></a>
+    <table class="tablelist" id="categoryTable1" border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Category Name</th>
+                <th>Image</th>
+                <th>Category desc</th>
+                <th>ProductCount</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
+                <th>Visibility</th>
+                <!-- <th>Update</th>
+                <th>Delete</th> -->
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            // echo '<pre>';
+            // print_r($categories);
+            ?>
+            <?php
+            // echo "<pre>";
+            // print_r($categories);
+            // die;
+            foreach ($categories as $category): ?>
+            <tr>
+                <td><?php echo htmlspecialchars($category->getCategoryId()); ?></td>
+                <td><?php echo $category->getName() ?>
+                <td>
+                    <img src="<?php echo $category->getImage() ?>" width="100" height="100" alt="Category_Image">
+                </td>
+                <td><?php echo htmlspecialchars($category->getDescription()); ?></td>
+                <td><?php echo htmlspecialchars($category->getProductCount()); ?></td>
+                <td><?php echo htmlspecialchars($category->getCreatedAt()); ?></td>
+                <td><?php echo htmlspecialchars($category->getUpdatedAt()); ?></td>
+                <td><?php echo htmlspecialchars($category->getVisibility()); ?></td>
+
+                <!-- <td id="update">
+
+                    <a href="">
+                        <i class="fa-solid fa-pen-to-square"></i></a>
+
+                </td>
+                <td id="delete">
+
+                    <a href="">
+                        <i class="fa-solid fa-trash-can"></i></a>
+                     <form action="?m=admin&v=category&a=deleteCategory" method="POST">
+                        <button type="submit" name="catagory_deletebtn"
+                            value="<?php //echo $category->getCategoryId(); 
+                                    ?>"
+                            onclick="return confirm('Are you confirm to delete this category')"><i
+                                class="fa-solid fa-trash-can"></i></button>
+                    </form> -->
+                <!-- </td> -->
+            </tr>
+            <?php endforeach ?>
+        </tbody>
+    </table>
+
+</body>

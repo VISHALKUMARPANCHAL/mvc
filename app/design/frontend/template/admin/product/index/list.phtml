@@ -1,0 +1,74 @@
+<h1>list1 phtml</h1>
+<?php
+$products = $this->getData();
+?>
+
+
+
+<body>
+    <h2>Product Admin</h2>
+
+    <a href="./new"><button id="insert"><i class="fa-solid fa-arrow-right-to-bracket"></i></button></a>
+
+    <table class="tablelist" id="producttable1" border="1">
+        <thead>
+            <tr>
+                <th>Product_id</th>
+                <th>Name</th>
+                <th>Image</th>
+                <th>Category</th>
+                <th>Desctiption</th>
+                <th>Price</th>
+                <th>Rating</th>
+                <th>Color</th>
+                <th>Size</th>
+                <th>Brand</th>
+                <th>Warranty</th>
+                <th>Weight</th>
+                <th>Made_in</th>
+                <th>Model</th>
+                <th>Mfg_date</th>
+                <th>Material</th>
+                <th>T_and_C</th>
+                <th>status</th>
+                <th>Update</th>
+                <th>Delete</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($products as $product): ?>
+                <tr>
+                    <td><?php echo htmlspecialchars($product->getProductId()); ?></td>
+                    <td><?php echo htmlspecialchars($product->getName()); ?></td>
+                    <td>
+                        <img src="<?php echo Mage::getBaseUrl() . $product->getImage() ?>" width="100" height="100"
+                            alt="Product_Image">
+                    </td>
+                    <td><?php echo htmlspecialchars($product->getCategoryId()); ?></td>
+                    <td><?php echo htmlspecialchars($product->getDescription()); ?></td>
+                    <td><?php echo htmlspecialchars($product->getPrice()); ?></td>
+                    <td><?php echo htmlspecialchars($product->getRating()); ?></td>
+                    <td><?php echo htmlspecialchars($product->getColor()); ?></td>
+                    <td><?php echo htmlspecialchars($product->getSize()); ?></td>
+                    <td><?php echo htmlspecialchars($product->getBrand()); ?></td>
+                    <td><?php echo htmlspecialchars($product->getWarranty()); ?></td>
+                    <td><?php echo htmlspecialchars($product->getWeight()); ?></td>
+                    <td><?php echo htmlspecialchars($product->getMadeIn()); ?></td>
+                    <td><?php echo htmlspecialchars($product->getModel()); ?></td>
+                    <td><?php echo htmlspecialchars($product->getMfgDate()); ?></td>
+                    <td><?php echo htmlspecialchars($product->getMaterial()); ?></td>
+                    <td><?php echo htmlspecialchars($product->getTAndC()); ?></td>
+                    <td><?php echo htmlspecialchars($product->getStatusText()); ?></td>
+                    <td id="update"><a href="./new/?id=<?php echo $product->getProductId(); ?>">
+                            <i class="fa-solid fa-pen-to-square"></i></a></td>
+                    <td id="delete">
+                        <a href="./delete/?id=<?php echo $product->getProductId(); ?>"
+                            onclick="return confirm('confirm delete?')">
+                            <i class="fa-solid fa-trash-can"></i></a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</body>
